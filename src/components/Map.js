@@ -1,7 +1,11 @@
 import GoogleMapReact from "google-map-react";
+import { useState } from "react";
+import LocationInfoBox from "./LocationInfoBox";
 import LocationMarker from "./LocationMarker";
 
 const Map = ({ center, zoom, eventData }) => {
+  const [locationInfo, setLocationInfo] = useState(null);
+
   const markers = eventData.map((event) => {
     if (event.categories[0].id === "wildfires") {
       return (
@@ -9,6 +13,7 @@ const Map = ({ center, zoom, eventData }) => {
           lat={event.geometry[0].coordinates[1]}
           lng={event.geometry[0].coordinates[0]}
           key={event.id}
+          onClick={() => setLocationInfo({ id: event.id, title: event.title })}
         />
       );
     }
@@ -24,6 +29,7 @@ const Map = ({ center, zoom, eventData }) => {
       >
         {markers}
       </GoogleMapReact>
+      {locationInfo && <LocationInfoBox info={locationInfo} />}
     </div>
   );
 };
