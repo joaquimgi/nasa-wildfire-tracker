@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Loader from "./components/Loader";
 
 import Map from "./components/Map";
 
@@ -16,16 +17,13 @@ function App() {
 
       setEventData(res.data.events);
       setLoading(false);
+      console.log(eventData);
     };
 
     fetchEvents();
   }, []);
 
-  return (
-    <div>
-      <Map />
-    </div>
-  );
+  return <div>{!loading ? <Map eventData={eventData} /> : <Loader />}</div>;
 }
 
 export default App;
