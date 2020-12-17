@@ -5,15 +5,28 @@ import LocationMarker from "./LocationMarker";
 
 const Map = ({ center, zoom, eventData }) => {
   const [locationInfo, setLocationInfo] = useState(null);
-
   const markers = eventData.map((event) => {
-    if (event.categories[0].id === "wildfires") {
+    if (
+      (event.categories[0].id === "wildfires" ||
+        event.categories[0].id === "severeStorms" ||
+        event.categories[0].id === "seaLakeIce" ||
+        event.categories[0].id === "volcanoes") &&
+      event.geometry[0].coordinates[1] != null
+    ) {
       return (
         <LocationMarker
-          lat={event.geometry[0].coordinates[1]}
-          lng={event.geometry[0].coordinates[0]}
+          lat={event.geometry[event.geometry.length - 1].coordinates[1]}
+          lng={event.geometry[event.geometry.length - 1].coordinates[0]}
           key={event.id}
-          onClick={() => setLocationInfo({ id: event.id, title: event.title })}
+          onClick={() =>
+            setLocationInfo({
+              id: event.id,
+              title: event.title,
+              description: event.description,
+              type: event.categories[0].title,
+            })
+          }
+          type={event.categories[0].id}
         />
       );
     }

@@ -1,6 +1,6 @@
 # NASA Wildfire Tracker [Demo](https://nasa-wildfire-tracker.netlify.app/)
 
-A Webapp displaying the current wildfires around the world from the NASA EONET API. This website was made following a video from Traversy Media with some changes.
+A Webapp displaying the current natural events occuring around the world from the NASA EONET API. This webapp was made following a video from Traversy Media and adding volcanoes, storms and icebergs handling.
 
 ![Demo](GithubDemoGif.gif)
 

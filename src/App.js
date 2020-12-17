@@ -18,7 +18,6 @@ function App() {
 
       setEventData(res.data.events);
       setLoading(false);
-      console.log(eventData);
     };
 
     fetchEvents();
